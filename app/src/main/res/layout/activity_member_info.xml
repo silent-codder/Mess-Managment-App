@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".member.MemberInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        app:titleTextColor="@color/black">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="14dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/back_arrow_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/ivBtnBack">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Member Info"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="version "
+                    android:textColor="@color/black_fade"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:civ_border_width="1dp"
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Member Name"
+                android:textColor="@color/black_fade"
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/tvMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+91 99999 99999"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black_fade"
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_below="@+id/tvMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Mobile | India"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/ivCall"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/call" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlWhatsApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvWp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WhatsApp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black_fade"
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_below="@+id/tvWp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Send Message"
+                    tools:ignore="HardcodedText" />
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/whatsapp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+
+
+            </RelativeLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="HardcodedText" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvPaymentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black_fade"
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tvPayment"
+                    android:layout_below="@+id/tvPaymentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="$ 1700 | Pending"
+                    android:textColor="@color/btn_red"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/btnPayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textAllCaps="false"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    tools:ignore="HardcodedText" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:textColor="@color/black_fade"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Start Date - End Date"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tvMessType"
+                    android:layout_below="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Day-Night"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/ivChangeDate"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/calendar"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvLeaveHistory"
+                    android:textColor="@color/black_fade"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Leave History"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_below="@+id/tvLeaveHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="0 leave"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/right_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvMessHistory"
+                    android:textColor="@color/black_fade"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Mess History"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_below="@+id/tvMessHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Check mess history"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/right_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Remainder"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/gray"
+        android:elevation="1dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_fade"
+                android:text="Send Message to member to join the app"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share Now"
+                android:fontFamily="@font/poppins_medium"
+                android:textAllCaps="false"
+                android:layout_below="@id/tvTitle1"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/blue"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".auth.RegisterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        android:elevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="14dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/back_arrow_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/ivBtnBack">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="Restaurant Register"
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:text="version "
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black_fade" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilResName"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Restaurant Name"
+        app:endIconMode="clear_text">
+
+        <EditText
+            android:id="@+id/etResName"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilResOwnerName"
+        android:layout_below="@id/tilResName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Owner Name"
+        app:endIconMode="clear_text">
+
+        <EditText
+            android:id="@+id/etResOwnerName"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvResType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilResOwnerName"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="20dp"
+        android:text="Restaurant Type"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/rgResType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/tvResType">
+
+        <RadioButton
+            android:id="@+id/rbVeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veg"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbNonVeg"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non-Veg"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbBoth"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veg/Non-Veg"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilResMobile"
+        android:layout_below="@id/rgResType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Mobile"
+        app:endIconMode="clear_text"
+        tools:ignore="HardcodedText">
+
+        <EditText
+            android:id="@+id/etResMobile"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="10"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_below="@id/tilResMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Email"
+        app:endIconMode="clear_text"
+        tools:ignore="HardcodedText">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilWebsite"
+        android:layout_below="@id/tilEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Website"
+        app:endIconMode="clear_text"
+        tools:ignore="HardcodedText">
+
+        <EditText
+            android:id="@+id/etWebsite"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textWebEditText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnAddRestaurant"
+        android:layout_below="@id/tilWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Add Restaurant"
+        tools:ignore="HardcodedText" />
+
+    <ProgressBar
+        android:id="@+id/resLoader"
+        android:layout_below="@id/tilWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone" />
+
+</RelativeLayout>
