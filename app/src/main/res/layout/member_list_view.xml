@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:padding="10dp">
+
+    <com.github.pavlospt.roundedletterview.RoundedLetterView
+        android:id="@+id/rlvTitle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:rlv_backgroundColorValue="@color/gray"
+        app:rlv_titleColor="@color/black_fade"
+        app:rlv_titleSize="30dp"
+        app:rlv_titleText="A" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/rlvTitle"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/rlvTitle"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Mobile"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Mess Date"
+        android:visibility="gone"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
