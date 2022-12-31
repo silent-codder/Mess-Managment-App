@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "member_table")
-data class DemoData(
+data class MemberData(
     val mess_member_close_at : String,
     val mess_member_created_at :String,
     val mess_member_delete_at :String,

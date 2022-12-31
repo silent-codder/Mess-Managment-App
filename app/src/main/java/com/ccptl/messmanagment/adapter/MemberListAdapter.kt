@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ccptl.messmanagment.R
 import com.ccptl.messmanagment.member.MemberInfoActivity
-import com.ccptl.messmanagment.room.DemoData
+import com.ccptl.messmanagment.room.MemberData
+import com.ccptl.messmanagment.utils.Constants
 import kotlinx.android.synthetic.main.member_list_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MemberListAdapter: RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
-    private var memberList = emptyList<DemoData>()
+    private var memberList = emptyList<MemberData>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -44,7 +44,7 @@ class MemberListAdapter: RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
 
         holder.itemView.rlMain.setOnClickListener {
             val intent = Intent(it.context, MemberInfoActivity::class.java)
-//            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, memberList[position].mess_member_id)
+            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, memberList[position].mess_member_id)
             it.context.startActivity(intent)
         }
 
@@ -54,7 +54,7 @@ class MemberListAdapter: RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
         return memberList.size
     }
 
-    fun setMemberListData(data: List<DemoData>){
+    fun setMemberListData(data: List<MemberData>){
         this.memberList = data
         notifyDataSetChanged()
     }

@@ -9,18 +9,18 @@ import com.ccptl.messmanagment.utils.Constants
 import com.google.firebase.firestore.FirebaseFirestore
 import com.huawei.todolist.utils.subscribeOnBackground
 
-@Database(entities = [DemoData::class], version = 1)
-abstract class DemoDatabase : RoomDatabase() {
+@Database(entities = [MemberData::class], version = 1)
+abstract class MessDatabase : RoomDatabase() {
 
-    abstract fun noteDao(): DemoDao
+    abstract fun noteDao(): DatabaseDao
 
     companion object {
-        private var instance: DemoDatabase? = null
+        private var instance: MessDatabase? = null
 
         @Synchronized
-        fun getInstance(ctx: Context): DemoDatabase {
+        fun getInstance(ctx: Context): MessDatabase {
             if(instance == null)
-                instance = Room.databaseBuilder(ctx.applicationContext, DemoDatabase::class.java,
+                instance = Room.databaseBuilder(ctx.applicationContext, MessDatabase::class.java,
                     "demo_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
@@ -37,18 +37,18 @@ abstract class DemoDatabase : RoomDatabase() {
             }
         }
 
-        private fun populateDatabase(db: DemoDatabase) {
-            val noteDao = db.noteDao()
-            val firebaseFirestore = FirebaseFirestore.getInstance()
-
-            subscribeOnBackground {
-                firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA).get().addOnSuccessListener {
-                    for (document in it) {
-                        val data = document.toObject(DemoData::class.java)
-                        noteDao.insert(data)
-                    }
-                }
-            }
+        private fun populateDatabase(db: MessDatabase) {
+//            val noteDao = db.noteDao()
+//            val firebaseFirestore = FirebaseFirestore.getInstance()
+//
+//            subscribeOnBackground {
+//                firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA).get().addOnSuccessListener {
+//                    for (document in it) {
+//                        val data = document.toObject(MemberData::class.java)
+//                        noteDao.insert(data)
+//                    }
+//                }
+//            }
         }
     }
 

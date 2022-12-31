@@ -67,5 +67,11 @@ class Constants {
         const val FIREBASE_RESTAURANT_UPDATED_AT = "res_updated_at"
         const val FIREBASE_RESTAURANT_DELETED_AT = "res_deleted_at"
         const val FIREBASE_RESTAURANT_OWNER_NAME = "res_owner_name"
+
+        const val FIREBASE_CHECK_LAST_ENTRY_DATA = "lastEntryData"
+        const val CHECK_LAST_ENTRY_MEMBER_DATA = "checkLastEntryMemberData"
+        const val CHECK_LAST_ENTRY_RESTAURANT_DATA = "checkLastEntryTableData"
+        const val RESTAURANT_ID = "restaurant_id"
+
     }
 }
