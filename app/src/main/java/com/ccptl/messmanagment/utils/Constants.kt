@@ -46,6 +46,7 @@ class Constants {
         const val FIREBASE_MESS_UPDATED_AT = "mess_member_updated_at"
         const val FIREBASE_MESS_CLOSE_AT = "mess_member_close_at"
         const val FIREBASE_MESS_DELETE_AT = "mess_member_delete_at"
+        const val FIREBASE_MESS_STATUS = "mess_member_status"
 
         const val FIREBASE_RESTAURANT_DATA = "restaurantData"
         const val FIREBASE_RESTAURANT_RES_ID = "res_id"
@@ -70,8 +71,13 @@ class Constants {
 
         const val FIREBASE_CHECK_LAST_ENTRY_DATA = "lastEntryData"
         const val CHECK_LAST_ENTRY_MEMBER_DATA = "checkLastEntryMemberData"
+        const val CHECK_LAST_ENTRY_MESS_HISTORY_DATA = "checkLastEntryMessHistoryData"
         const val CHECK_LAST_ENTRY_RESTAURANT_DATA = "checkLastEntryTableData"
         const val RESTAURANT_ID = "restaurant_id"
+
+        const val FIREBASE_MESS_HISTORY_DATA = "messHistoryData"
+        const val FIREBASE_MESS_HISTORY_ID = "mess_history_id"
+        const val FIREBASE_MESS_HISTORY_MEMBER_ID = "mess_history_member_id"
 
     }
 }

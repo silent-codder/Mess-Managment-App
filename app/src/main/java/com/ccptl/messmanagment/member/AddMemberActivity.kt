@@ -145,6 +145,7 @@ class AddMemberActivity : AppCompatActivity() {
 
                 val entryMap = HashMap<String, Boolean>()
                 entryMap[Constants.CHECK_LAST_ENTRY_MEMBER_DATA] = true
+                entryMap[Constants.CHECK_LAST_ENTRY_MESS_HISTORY_DATA] = true
 
                 firestore.collection(Constants.FIREBASE_CHECK_LAST_ENTRY_DATA).document(firebaseAuth.currentUser?.uid.toString())
                     .set(entryMap)
@@ -162,6 +163,37 @@ class AddMemberActivity : AppCompatActivity() {
                         btnAddMember.visibility = View.VISIBLE
                         Toast.makeText(this, "Failed to add member", Toast.LENGTH_SHORT).show()
                     }
+
+
+                val historyKey: String =
+                    dataBase.getReference(Constants.FIREBASE_MESS_HISTORY_DATA).push().key.toString()
+
+                val historyMap = HashMap<String, String>()
+                historyMap[Constants.FIREBASE_MESS_HISTORY_ID] = historyKey
+                historyMap[Constants.FIREBASE_MESS_HISTORY_MEMBER_ID] = key
+                historyMap[Constants.FIREBASE_MESS_FROM_DATE] = fromDateTimeStamp
+                historyMap[Constants.FIREBASE_MESS_TO_DATE] = toDateTimeStamp
+                historyMap[Constants.RESTAURANT_ID] = firebaseAuth.currentUser?.uid.toString()
+                historyMap[Constants.FIREBASE_MESS_CREATED_AT] = Calendar.getInstance().time.toString()
+                historyMap[Constants.FIREBASE_MESS_UPDATED_AT] = Calendar.getInstance().time.toString()
+                historyMap[Constants.FIREBASE_MESS_CLOSE_AT] = ""
+                historyMap[Constants.FIREBASE_MESS_DELETE_AT] = ""
+                historyMap[Constants.FIREBASE_MESS_STATUS] = "active"
+
+                firestore.collection(Constants.FIREBASE_MESS_HISTORY_DATA)
+                    .document(historyKey).set(historyMap).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            loader.visibility = View.GONE
+                            btnAddMember.visibility = View.VISIBLE
+                            Toast.makeText(this, "Entry successfully", Toast.LENGTH_SHORT).show()
+                            onBackPressed()
+                        }
+                    }.addOnFailureListener {
+                        loader.visibility = View.GONE
+                        btnAddMember.visibility = View.VISIBLE
+                        Toast.makeText(this, "Failed to add member", Toast.LENGTH_SHORT).show()
+                    }
+
             }
         }
 

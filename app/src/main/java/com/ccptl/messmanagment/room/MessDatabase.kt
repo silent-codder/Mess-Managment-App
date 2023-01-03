@@ -9,7 +9,7 @@ import com.ccptl.messmanagment.utils.Constants
 import com.google.firebase.firestore.FirebaseFirestore
 import com.huawei.todolist.utils.subscribeOnBackground
 
-@Database(entities = [MemberData::class], version = 1)
+@Database(entities = [MemberData::class, MessHistoryData::class], version = 1, exportSchema = false)
 abstract class MessDatabase : RoomDatabase() {
 
     abstract fun noteDao(): DatabaseDao

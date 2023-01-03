@@ -22,4 +22,18 @@ interface DatabaseDao {
 
     @Query("select * from member_table where mess_member_id = :messMemberId")
     fun getMemberById(messMemberId: String): LiveData<MemberData>
+
+    //update payment status
+    @Query("update member_table set mess_member_payment_mode = :paymentMode where mess_member_id = :messMemberId")
+    fun updatePaymentStatus(messMemberId: String, paymentMode: String)
+
+
+    //mess history
+
+    @Insert
+    fun insertHistory(messHistoryData: MessHistoryData)
+
+    @Query("select * from mess_history_table order by mess_member_from_date desc")
+    fun getAllMessHistoryData(): LiveData<List<MessHistoryData>>
+
 }
