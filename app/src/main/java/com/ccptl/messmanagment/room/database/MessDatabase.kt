@@ -1,27 +1,26 @@
-package com.ccptl.messmanagment.room
+package com.ccptl.messmanagment.room.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.ccptl.messmanagment.utils.Constants
-import com.google.firebase.firestore.FirebaseFirestore
-import com.huawei.todolist.utils.subscribeOnBackground
+import com.ccptl.messmanagment.room.DatabaseDao
+import com.ccptl.messmanagment.room.roomModel.MemberData
+import com.ccptl.messmanagment.room.roomModel.MessData
 
-@Database(entities = [MemberData::class, MessHistoryData::class], version = 1, exportSchema = false)
+@Database(entities = [MemberData::class,MessData::class], version = 1, exportSchema = false)
 abstract class MessDatabase : RoomDatabase() {
 
-    abstract fun noteDao(): DatabaseDao
+    abstract fun messDao(): DatabaseDao
 
     companion object {
         private var instance: MessDatabase? = null
-
         @Synchronized
         fun getInstance(ctx: Context): MessDatabase {
             if(instance == null)
                 instance = Room.databaseBuilder(ctx.applicationContext, MessDatabase::class.java,
-                    "demo_database")
+                    "mess_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build()

@@ -5,11 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -18,8 +14,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ccptl.messmanagment.BuildConfig
 import com.ccptl.messmanagment.R
-import com.ccptl.messmanagment.room.MemberData
+import com.ccptl.messmanagment.room.roomModel.MemberData
 import com.ccptl.messmanagment.utils.Constants
+import com.ccptl.messmanagment.utils.PrefHelper
 import com.ccptl.messmanagment.viewModel.RoomViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,10 +33,11 @@ class MemberInfoActivity : AppCompatActivity() {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var currentUserId = firebaseAuth.currentUser?.uid.toString()
     private lateinit var refreshLayout: SwipeRefreshLayout
-
+    private lateinit var prefHelper: PrefHelper
 
     private lateinit var ivCall: ImageView
     private lateinit var btnPayment: Button
+    private lateinit var btnMessStatus: Button
     private lateinit var rlMessHistory: RelativeLayout
 
     val data = ArrayList<MemberData>()
@@ -52,54 +50,72 @@ class MemberInfoActivity : AppCompatActivity() {
 
         ivCall = findViewById(R.id.ivCall)
         btnPayment = findViewById(R.id.btnPayment)
+        btnMessStatus = findViewById(R.id.btnMessStatus)
         rlMessHistory = findViewById(R.id.rlMessHistory)
+
+        prefHelper = PrefHelper(this)
 
         findViewById<TextView>(R.id.version).text = "V-${BuildConfig.VERSION_NAME}"
         findViewById<ImageView>(R.id.ivBtnBack).setOnClickListener {
             onBackPressed()
         }
 
+        //fetch data from room and set to view
         val memberId = intent.hasExtra(Constants.FIREBASE_MESS_MEMBER_ID)
-
         vm = ViewModelProviders.of(this)[RoomViewModel::class.java]
         if (memberId) {
-            vm.getMemberById(intent.getStringExtra(Constants.FIREBASE_MESS_MEMBER_ID)!!)
-            vm.getMemberByIdData.observe(this, Observer {
-                data.add(it)
-                tvName.text = it.mess_member_name
-                tvMobile.text = "+91 " + it.mess_member_mobile.toString()
-                tvDate.text = getDate(it.mess_member_from_date.toString().toLong()) + " - " +
-                        getDate(it.mess_member_to_date.toString().toLong())
-                tvMessType.text = it.mess_type.toString()
-                if (it.mess_member_payment_mode == "Pending") {
-                    tvPayment.text =
-                        "₹ " + it.mess_member_payment.toString() + " | " + it.mess_member_payment_mode
-                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.btn_red))
-                } else {
-                    tvPayment.text = "₹ " + it.mess_member_payment.toString() + " |  Done"
-                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.green))
-                    btnPayment.visibility = View.GONE
-                }
-            })
+//            vm.getMemberById(intent.getStringExtra(Constants.FIREBASE_MESS_MEMBER_ID)!!)
+//            vm.getMemberByIdData.observe(this, Observer {
+//                data.add(it)
+//                tvName.text = it.mess_member_name
+//                tvMobile.text = "+91 " + it.mess_member_mobile.toString()
+//                tvMessType.text = it.mess_type.toString()
+//                if (it.mess_member_payment_mode == "Pending") {
+//                    tvPayment.text =
+//                        "₹ " + it.mess_member_payment.toString() + " | " + it.mess_member_payment_mode
+//                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.btn_red))
+//                } else {
+//                    tvPayment.text = "₹ " + it.mess_member_payment.toString() + " |  Done"
+//                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.green))
+//                    btnPayment.visibility = View.GONE
+//                }
+//            })
+
+//            vm.getActiveMess(intent.getStringExtra(Constants.FIREBASE_MESS_MEMBER_ID)!!)
+//            vm.getActiveMess.observe(this, Observer {
+//                tvDate.text = getDate(it[0].mess_member_from_date.toString().toLong()) + " - " +
+//                        getDate(it[0].mess_member_to_date.toString().toLong())
+//                btnMessStatus.text = it[0].mess_member_status.toUpperCase()
+//                if (it[0].mess_member_status == "active") {
+//                    btnMessStatus.setTextColor(btnMessStatus.context.getColor(R.color.green))
+//                } else {
+//                    btnMessStatus.setTextColor(btnMessStatus.context.getColor(R.color.btn_red))
+//                }
+//            })
+
         }
 
+        // Call Member
         ivCall.setOnClickListener {
-            callMember(data[0].mess_member_mobile.toString())
+//            val intent = Intent(Intent.ACTION_DIAL)
+//            intent.data = "tel:${data[0].mess_member_mobile}".toUri()
+//            startActivity(intent)
         }
 
+        //update payment status
         btnPayment.setOnClickListener {
-            firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA)
-                .document(data[0].mess_member_id.toString())
-                .update("mess_member_payment_mode", "Done")
-                .addOnSuccessListener {
-                    btnPayment.visibility = View.GONE
-                    tvPayment.text = "₹ " + data[0].mess_member_payment.toString() + " |  Done"
-                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.green))
-                    vm.updatePaymentStatus(data[0].mess_member_id.toString(), "Done")
-                    Toast.makeText(this, "Payment Done", Toast.LENGTH_SHORT).show()
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
-                }
+//            firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA)
+//                .document(data[0].mess_member_id.toString())
+//                .update("mess_member_payment_mode", "Done")
+//                .addOnSuccessListener {
+//                    btnPayment.visibility = View.GONE
+//                    tvPayment.text = "₹ " + data[0].mess_member_payment.toString() + " |  Done"
+//                    tvPayment.setTextColor(tvPayment.context.getColor(R.color.green))
+//                    vm.updatePaymentStatus(data[0].mess_member_id.toString(), "Done")
+//                    Toast.makeText(this, "Payment Done", Toast.LENGTH_SHORT).show()
+//                }.addOnFailureListener {
+//                    Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
+//                }
 
             val entryMap = HashMap<String, Boolean>()
             entryMap[Constants.CHECK_LAST_ENTRY_MEMBER_DATA] = true
@@ -109,19 +125,40 @@ class MemberInfoActivity : AppCompatActivity() {
 //                .set(entryMap)
         }
 
-        rlMessHistory.setOnClickListener {
-            val intent = Intent(it.context, MessHistoryActivity::class.java)
-            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, data[0].mess_member_id.toString())
-            it.context.startActivity(intent)
+        //btn change status
+        btnMessStatus.setOnClickListener {
+            val btnStatus = btnMessStatus.text.toString()
+            //match two string
+
+//            if (btnStatus.equals("active", true)) {
+//                firebaseFirestore.collection(Constants.FIREBASE_MESS_HISTORY_DATA)
+//                    .document(data[0].mess_member_id.toString())
+//                    .update(Constants.FIREBASE_MESS_STATUS, "close")
+//                    .addOnSuccessListener {
+//                        btnMessStatus.text = "CLOSE"
+//                        btnMessStatus.setTextColor(btnMessStatus.context.getColor(R.color.btn_red))
+//                        vm.updateMessStatus(data[0].mess_member_id.toString(), "close")
+//                        Toast.makeText(this, "Status Changed", Toast.LENGTH_SHORT).show()
+//                    }.addOnFailureListener {
+//                        Toast.makeText(this, "Status Change Failed", Toast.LENGTH_SHORT).show()
+//                    }
+//
+//                val entryMap = HashMap<String, Boolean>()
+//                entryMap[Constants.CHECK_LAST_ENTRY_MESS_HISTORY_DATA] = true
+//
+//                firebaseFirestore.collection(Constants.FIREBASE_CHECK_LAST_ENTRY_DATA)
+//                    .document(firebaseAuth.currentUser?.uid.toString())
+//                    .set(entryMap)
+//            }
         }
 
-    }
+        //start activity for mess history
+        rlMessHistory.setOnClickListener {
+//            val intent = Intent(it.context, MessHistoryActivity::class.java)
+//            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, data[0].mess_member_id.toString())
+//            it.context.startActivity(intent)
+        }
 
-    private fun callMember(mobNumber: String) {
-        //open dialer
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = "tel:$mobNumber".toUri()
-        startActivity(intent)
     }
 
     @SuppressLint("SimpleDateFormat")

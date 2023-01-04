@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ccptl.messmanagment.adapter.MemberListAdapter
 import com.ccptl.messmanagment.member.AddMemberActivity
-import com.ccptl.messmanagment.room.MemberData
 import com.ccptl.messmanagment.utils.Constants
+import com.ccptl.messmanagment.utils.PrefHelper
 import com.ccptl.messmanagment.viewModel.RoomViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,15 +28,17 @@ class MainActivity : AppCompatActivity() {
     private var currentUserId = firebaseAuth.currentUser?.uid.toString()
     private val memberListAdapter by lazy { MemberListAdapter() }
     private lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var prefHelper: PrefHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         vm = ViewModelProviders.of(this)[RoomViewModel::class.java]
+        prefHelper = PrefHelper(this)
         refreshLayout = findViewById(R.id.refresh)
 
-        version.text = "V : ${BuildConfig.VERSION_NAME}"
+//        version.text = "V : ${BuildConfig.VERSION_NAME}"
 
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false
@@ -44,17 +46,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkUpdate()
-        fetchData()
+
+        if (prefHelper.getBoolean(Constants.CHECK_LAST_ENTRY_MEMBER_DATA,false)) {
+            fetchData()
+        }
 
         rvMemberList.layoutManager = LinearLayoutManager(this)
         rvMemberList.adapter = memberListAdapter
         rvMemberList.setHasFixedSize(true)
 
-        vm.getAllNotes().observe(this, Observer {
-            Log.i("Notes observed", "$it")
-            memberListAdapter.setMemberListData(it)
-            memberListAdapter.notifyDataSetChanged()
-        })
+//        vm.getAllNotes().observe(this, Observer {
+//            Log.i("Notes observed", "$it")
+//            memberListAdapter.setMemberListData(it)
+//            memberListAdapter.notifyDataSetChanged()
+//        })
 
         fabAdd.setOnClickListener {
             startActivity(Intent(this@MainActivity, AddMemberActivity::class.java))
@@ -70,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     if (data != null) {
                         lastEntry = data as Boolean
                         if (lastEntry) {
-                            vm.deleteAllNotes()
+//                            vm.deleteAllNotes()
                             fetchData()
                             Log.d(TAG, "LAST ENTRY $data : MEMBER DATA FOUND")
                         }else{
@@ -89,21 +94,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchData() {
-        Log.d(TAG, "FIREBASE  : fetch data from firebase")
-        firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA)
-            .whereEqualTo(Constants.RESTAURANT_ID, currentUserId).get()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    for (document in it.result) {
-                        val memberData = document.toObject(MemberData::class.java)
-                        vm.insert(memberData)
-                    }
-                }
-            }
-
-        firebaseFirestore.collection(Constants.FIREBASE_CHECK_LAST_ENTRY_DATA)
-            .document(currentUserId)
-            .update(Constants.CHECK_LAST_ENTRY_MEMBER_DATA, false)
+//        Log.d(TAG, "FIREBASE  : fetch data from firebase")
+//        firebaseFirestore.collection(Constants.FIREBASE_MESS_MEMBER_DATA)
+//            .whereEqualTo(Constants.RESTAURANT_ID, currentUserId).get()
+//            .addOnCompleteListener {
+//                if (it.isSuccessful) {
+//                    for (document in it.result) {
+//                        val memberData = document.toObject(MemberData::class.java)
+//                        vm.insert(memberData)
+//                        prefHelper.put(Constants.CHECK_LAST_ENTRY_MEMBER_DATA, false)
+//                    }
+//                }
+//            }
+//
+//        firebaseFirestore.collection(Constants.FIREBASE_CHECK_LAST_ENTRY_DATA)
+//            .document(currentUserId)
+//            .update(Constants.CHECK_LAST_ENTRY_MEMBER_DATA, false)
     }
 
 }

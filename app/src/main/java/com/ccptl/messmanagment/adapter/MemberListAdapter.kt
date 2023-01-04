@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ccptl.messmanagment.R
 import com.ccptl.messmanagment.member.MemberInfoActivity
-import com.ccptl.messmanagment.room.MemberData
+import com.ccptl.messmanagment.room.roomModel.MemberData
 import com.ccptl.messmanagment.utils.Constants
 import kotlinx.android.synthetic.main.member_list_view.view.*
 import java.text.SimpleDateFormat
@@ -37,16 +37,16 @@ class MemberListAdapter: RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
             holder.itemView.rlvTitle.backgroundColor = holder.itemView.context.resources.getColor(R.color.white_grey)
         }
 
-        holder.itemView.tvName.text = memberList[position].mess_member_name
-        holder.itemView.rlvTitle.titleText = memberList[position].mess_member_name.substring(0,1)
-        holder.itemView.tvMobile.text = "+91 " + memberList[position].mess_member_mobile
-        holder.itemView.tvDate.text = getDate(memberList[position].mess_member_from_date.toLong()) +" - "+ getDate(memberList[position].mess_member_to_date.toLong())
-
-        holder.itemView.rlMain.setOnClickListener {
-            val intent = Intent(it.context, MemberInfoActivity::class.java)
-            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, memberList[position].mess_member_id)
-            it.context.startActivity(intent)
-        }
+//        holder.itemView.tvName.text = memberList[position].mess_member_name
+//        holder.itemView.rlvTitle.titleText = memberList[position].mess_member_name.substring(0,1)
+//        holder.itemView.tvMobile.text = "+91 " + memberList[position].mess_member_mobile
+//        holder.itemView.tvDate.text = getDate(memberList[position].mess_member_from_date.toLong()) +" - "+ getDate(memberList[position].mess_member_to_date.toLong())
+//
+//        holder.itemView.rlMain.setOnClickListener {
+//            val intent = Intent(it.context, MemberInfoActivity::class.java)
+//            intent.putExtra(Constants.FIREBASE_MESS_MEMBER_ID, memberList[position].mess_member_id)
+//            it.context.startActivity(intent)
+//        }
 
     }
 

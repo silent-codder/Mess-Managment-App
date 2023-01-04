@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.RegisterMemberActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        android:elevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="14dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/back_arrow_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/ivBtnBack">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="Register Member"
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:text="version "
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black_fade" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilName"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Full Name"
+        app:endIconMode="clear_text">
+
+        <EditText
+            android:id="@+id/etName"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMobile"
+        android:layout_below="@id/tilName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Mobile"
+        app:endIconMode="clear_text"
+        tools:ignore="HardcodedText">
+
+        <EditText
+            android:id="@+id/etMobile"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="10"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Email"
+        app:endIconMode="clear_text">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnRegisterMember"
+        android:layout_below="@id/rgPaymentType"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Register Member"
+        tools:ignore="HardcodedText" />
+
+    <ProgressBar
+        android:id="@+id/pbLoader"
+        android:layout_below="@id/rgPaymentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone" />
+
+</LinearLayout>

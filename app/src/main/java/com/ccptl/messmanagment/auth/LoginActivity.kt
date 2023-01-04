@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ccptl.messmanagment.BuildConfig
 import com.ccptl.messmanagment.MainActivity
 import com.ccptl.messmanagment.R
+import com.ccptl.messmanagment.activity.MemberListActivity
+import com.ccptl.messmanagment.utils.Constants
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_LOGIN_DATA
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_LOGIN_DATE
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_LOGIN_EMAIL
@@ -20,6 +22,7 @@ import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_LOGIN_PASSWORD
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_USER_ID
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_USER_TYPE
 import com.ccptl.messmanagment.utils.Constants.Companion.FIREBASE_VERSION_NAME
+import com.ccptl.messmanagment.utils.PrefHelper
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var pbLoader: ProgressBar
     private lateinit var btnLogin: Button
+    private lateinit var prefHelper: PrefHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +53,13 @@ class LoginActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
 
+        prefHelper = PrefHelper(this)
+
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
 //        tvVersion.text = "Version : ${BuildConfig.VERSION_NAME}"
         if (firebaseAuth.currentUser != null) {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, MemberListActivity::class.java))
             finish()
         }
 
@@ -103,12 +109,14 @@ class LoginActivity : AppCompatActivity() {
                 firebaseFirestore.collection(FIREBASE_LOGIN_DATA)
                     .document(currentUserId).set(loginHashMap).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            prefHelper.put(Constants.CHECK_LAST_ENTRY_MEMBER_DATA, true)
+                            prefHelper.put(Constants.CHECK_LAST_ENTRY_MESS_HISTORY_DATA, true)
                             Toast.makeText(
                                 this@LoginActivity,
                                 "Login Successfully",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, MemberListActivity::class.java))
                             finish()
                         }
                     }.addOnFailureListener {

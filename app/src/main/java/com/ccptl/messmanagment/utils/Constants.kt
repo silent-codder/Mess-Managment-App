@@ -9,6 +9,8 @@ class Constants {
         const val FIREBASE_ERROR_CODE = "error_code"
         const val FIREBASE_VERSION_NAME = "version_name"
 
+        const val PREFS_NAME = "mess_management_prefs"
+
         const val FIREBASE_LOGIN_DATA = "loginData"
         const val FIREBASE_LOGIN_EMAIL = "email"
         const val FIREBASE_LOGIN_PASSWORD = "password"
@@ -75,9 +77,19 @@ class Constants {
         const val CHECK_LAST_ENTRY_RESTAURANT_DATA = "checkLastEntryTableData"
         const val RESTAURANT_ID = "restaurant_id"
 
+
         const val FIREBASE_MESS_HISTORY_DATA = "messHistoryData"
         const val FIREBASE_MESS_HISTORY_ID = "mess_history_id"
         const val FIREBASE_MESS_HISTORY_MEMBER_ID = "mess_history_member_id"
+
+
+        const val SHARED_PREF_FETCH_DATA_FIRST_TIME = "fetch_data_first_time"
+
+
+
+
+        const val ACTIVE = "active"
+        const val CLOSE = "close"
 
     }
 }

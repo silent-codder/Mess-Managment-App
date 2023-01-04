@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MessEntryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        android:elevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="14dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/back_arrow_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/ivBtnBack">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="Mess Entry"
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:text="version "
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black_fade" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mess Type"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/rgMessType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbDayNight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day-Night"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbNight"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Night"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbDay"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:paddingHorizontal="20dp"
+        android:fontFamily="@font/poppins_medium"
+        app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
+        app:endIconMode="custom"
+        app:hintTextColor="@color/black"
+        app:endIconTint="@color/black">
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Date"
+            android:inputType="date"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray"
+        android:hint="Payment"
+        tools:ignore="HardcodedText">
+
+        <EditText
+            android:id="@+id/etPayment"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="4"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Type"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/rgPaymentType"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash"
+            android:fontFamily="@font/poppins_medium"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Online"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginLeft="10dp"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginLeft="10dp"
+            tools:ignore="HardcodedText" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnMessEntry"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Submit"
+        tools:ignore="HardcodedText" />
+
+    <ProgressBar
+        android:id="@+id/pbLoader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone" />
+
+</LinearLayout>

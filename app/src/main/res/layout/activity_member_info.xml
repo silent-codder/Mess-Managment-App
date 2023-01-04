@@ -236,15 +236,20 @@
                     android:text="Day-Night"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
-                    android:id="@+id/ivChangeDate"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/calendar"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"/>
 
+                <Button
+                    android:id="@+id/btnMessStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Active"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textAllCaps="false"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/green"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    tools:ignore="HardcodedText" />
 
             </RelativeLayout>
 
