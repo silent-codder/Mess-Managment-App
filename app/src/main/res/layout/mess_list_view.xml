@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="5dp"
+    app:contentPadding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:textColor="@color/black_fade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Start Date - End Date"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvMessType"
+                android:layout_below="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Day-Night"
+                tools:ignore="HardcodedText" />
+
+
+            <Button
+                android:id="@+id/btnMessStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:fontFamily="@font/poppins_medium"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:textColor="@color/green"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvPaymentTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black_fade"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvPayment"
+                android:layout_below="@+id/tvPaymentTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="$ 1700 | Pending"
+                android:textColor="@color/btn_red"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:fontFamily="@font/poppins_medium"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

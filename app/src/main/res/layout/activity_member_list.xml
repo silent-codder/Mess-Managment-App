@@ -66,9 +66,9 @@
 
                 <ImageView
                     android:id="@+id/ivBtnSearch"
-                    android:visibility="gone"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
+                    android:visibility="gone"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="12dp"
@@ -116,7 +116,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:inputType="number"
+            android:inputType="textCapWords"
             android:queryHint="Search name"
             android:visibility="gone" />
 

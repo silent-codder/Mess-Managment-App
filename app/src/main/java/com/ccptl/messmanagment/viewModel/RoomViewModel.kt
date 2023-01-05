@@ -6,13 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ccptl.messmanagment.repository.RoomRepository
 import com.ccptl.messmanagment.room.roomModel.MemberData
+import com.ccptl.messmanagment.room.roomModel.MessData
 
 class RoomViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repository = RoomRepository(app)
-//    private val allNotes = repository.getAllMemberData()
-//    val getMemberByIdData: MutableLiveData<MemberData> = MutableLiveData()
-//    val getHistoryByMemberId: MutableLiveData<List<MessHistoryData>> = MutableLiveData()
+    private val allMemberData = repository.getAllMemberData()
+    var getMemberByIdData: LiveData<List<MemberData>> = MutableLiveData()
+    val getMessDataByMemberId: MutableLiveData<List<MessData>> = MutableLiveData()
 //    val getActiveMess: MutableLiveData<List<MessHistoryData>> = MutableLiveData()
 
 
@@ -20,57 +21,37 @@ class RoomViewModel(app: Application) : AndroidViewModel(app) {
         repository.insertMember(memberData)
     }
 
-    fun deleteAll() {
-        repository.deleteAll()
+    fun insertMessData(messData: MessData) {
+        repository.insertMessData(messData)
     }
 
-//    fun insert(note: MemberData) {
-//        repository.insert(note)
-//    }
-//
-//    fun update(note: MemberData) {
-//        repository.update(note)
-//    }
-//
+    fun deleteAllMemberData() {
+        repository.deleteAllMemberData()
+    }
 
-//
-//    fun deleteAllNotes() {
-//        repository.deleteAllNotes()
-//    }
-//
-//    fun getAllNotes(): LiveData<List<MemberData>> {
-//        return allNotes
-//    }
-//
-//    fun getMemberById(messMemberId: String) {
-//        repository.getMemberById(messMemberId).observeForever {
-//            getMemberByIdData.value = it
-//        }
-//    }
-//
-//    fun updatePaymentStatus(messMemberId: String, paymentMode: String) {
-//        repository.updatePaymentStatus(messMemberId, paymentMode)
-//    }
-//
-//    //mess history
-//
-//    fun insertHistory(messHistoryData: MessHistoryData) {
-//        repository.insertHistory(messHistoryData)
-//    }
-//
-//    fun getHistoryByMemberIdData(messMemberId: String) {
-//        repository.getHistoryByMemberIdData(messMemberId).observeForever {
-//            getHistoryByMemberId.value = it
-//        }
-//    }
-//
-//    fun getActiveMess(messMemberId: String){
-//        repository.getActiveMessMember(messMemberId).observeForever {
-//            getActiveMess.value = it
-//        }
-//    }
-//
-//    fun updateMessStatus(messMemberId: String, status: String){
-//        repository.updateMessStatus(messMemberId, status)
-//    }
+    fun deleteAllMessData() {
+        repository.deleteAllMessData()
+    }
+
+    fun getAllMemberData(): LiveData<List<MemberData>> {
+        return allMemberData
+    }
+
+    fun getMemberById(messMemberId: String) {
+        getMemberByIdData = repository.getMemberById(messMemberId)
+    }
+
+    fun getMessDataById(messMemberId: String) {
+        repository.getMessDataById(messMemberId).observeForever {
+            getMessDataByMemberId.value = it
+        }
+    }
+
+    fun updatePaymentStatus(messId: String, paymentStatus: String) {
+        repository.updatePaymentStatus(messId, paymentStatus)
+    }
+
+    fun updateMessStatus(messId: String, messStatus: String) {
+        repository.updateMessStatus(messId, messStatus)
+    }
 }

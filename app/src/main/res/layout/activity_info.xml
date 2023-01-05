@@ -1,9 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.InfoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        android:elevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBtnBack"
+                android:layout_width="14dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/back_arrow_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/ivBtnBack">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="Member Info"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:text="version "
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black_fade" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ivBtnSearch"
+                    android:visibility="gone"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/search_icon" />
+
+                <ImageView
+                    android:id="@+id/ivBtnSortFilter"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/sort" />
+
+                <ImageView
+                    android:id="@+id/ivBtnDateFilter"
+                    android:visibility="gone"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginRight="28dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/ivBtnDateFilter"
+                    android:src="@drawable/date" />
+
+                <ImageView
+                    android:id="@+id/ivBtnFilter"
+                    android:visibility="gone"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginRight="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/filter_icon" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:inputType="number"
+            android:queryHint="Search name"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textColor="@color/black_fade"
+            android:visibility="gone" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ivProfile"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium" />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tvName"
+            android:layout_toRightOf="@id/ivProfile"
+            android:text="Mobile"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium" />
+
+        <ImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/edit"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivProfile"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mess History"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMessList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddMessEntry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="25dp"
+                android:src="@drawable/ic_baseline_add_24"
+                app:backgroundTint="@color/white" />
+
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No data found"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/tvNoDataFound"/>
+
+</LinearLayout>

@@ -1,21 +1,22 @@
 package com.ccptl.messmanagment.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.ccptl.messmanagment.room.DatabaseDao
 import com.ccptl.messmanagment.room.database.MessDatabase
 import com.ccptl.messmanagment.room.roomModel.MemberData
+import com.ccptl.messmanagment.room.roomModel.MessData
 import com.huawei.todolist.utils.subscribeOnBackground
 
 class RoomRepository(application: Application) {
 
     private var messDao: DatabaseDao
-//    private var allNotes: LiveData<List<MemberData>>
-
+    private var allMemberData: LiveData<List<MemberData>>
     private val database = MessDatabase.getInstance(application)
 
     init {
         messDao = database.messDao()
-//        allNotes = demoDao.getAllNotes()
+        allMemberData = messDao.getAllMemberData()
     }
 
     fun insertMember(memberData: MemberData) {
@@ -24,69 +25,45 @@ class RoomRepository(application: Application) {
         }
     }
 
-    fun deleteAll() {
+    fun insertMessData(messData: MessData) {
         subscribeOnBackground {
-            messDao.deleteAll()
+            messDao.insertMessData(messData)
         }
     }
 
-//    fun insert(note: MemberData) {
-//        subscribeOnBackground {
-//            demoDao.insert(note)
-//        }
-//    }
-//
-//    fun update(note: MemberData) {
-//        subscribeOnBackground {
-//            demoDao.update(note)
-//        }
-//    }
-//
-//    fun delete(note: MemberData) {
-//        subscribeOnBackground {
-//            demoDao.delete(note)
-//        }
-//    }
-//
-//    fun deleteAllNotes() {
-//        subscribeOnBackground {
-//            demoDao.deleteAllNotes()
-//        }
-//    }
-//
-//    fun getAllMemberData(): LiveData<List<MemberData>> {
-//        return allNotes
-//    }
-//
-//    fun getMemberById(messMemberId: String): LiveData<MemberData> {
-//        return demoDao.getMemberById(messMemberId)
-//    }
-//
-//    fun updatePaymentStatus(messMemberId: String, paymentMode: String) {
-//        subscribeOnBackground {
-//            demoDao.updatePaymentStatus(messMemberId, paymentMode)
-//        }
-//    }
-//
-//    //mess history
-//
-//    fun insertHistory(messHistoryData: MessHistoryData) {
-//        subscribeOnBackground {
-//            demoDao.insertHistory(messHistoryData)
-//        }
-//    }
-//
-//    fun getHistoryByMemberIdData(messMemberId: String): LiveData<List<MessHistoryData>> {
-//        return demoDao.getHistoryByMemberId(messMemberId)
-//    }
-//
-//    fun getActiveMessMember(messMemberId: String,): LiveData<List<MessHistoryData>> {
-//        return demoDao.getActiveMess(messMemberId)
-//    }
-//
-//    fun updateMessStatus(messMemberId: String, status: String) {
-//        subscribeOnBackground {
-//            demoDao.updateMessStatus(messMemberId, status)
-//        }
-//    }
+    fun deleteAllMemberData() {
+        subscribeOnBackground {
+            messDao.deleteAllMemberData()
+        }
+    }
+
+    fun deleteAllMessData() {
+        subscribeOnBackground {
+            messDao.deleteAllMessData()
+        }
+    }
+
+    fun getAllMemberData(): LiveData<List<MemberData>> {
+        return allMemberData
+    }
+
+    fun getMemberById(messMemberId: String): LiveData<List<MemberData>> {
+        return messDao.getMemberById(messMemberId)
+    }
+
+    fun getMessDataById(messMemberId: String): LiveData<List<MessData>> {
+        return messDao.getMessDataByMemberId(messMemberId)
+    }
+
+    fun updatePaymentStatus(messId: String, paymentStatus: String) {
+        subscribeOnBackground {
+            messDao.updatePaymentStatus(messId, paymentStatus)
+        }
+    }
+
+    fun updateMessStatus(messId: String, messStatus: String) {
+        subscribeOnBackground {
+            messDao.updateMessStatus(messId, messStatus)
+        }
+    }
 }

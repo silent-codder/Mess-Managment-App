@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical"
+        tools:ignore="HardcodedText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Payment Status"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_medium"/>
+
+        <RadioGroup
+            android:layout_marginTop="15dp"
+            android:id="@+id/rgPaymentType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/rbOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/rbPending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="HardcodedText" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnUpdatePaymentStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

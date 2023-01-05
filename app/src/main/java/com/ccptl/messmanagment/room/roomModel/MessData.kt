@@ -8,9 +8,9 @@ data class MessData(
     val memberId: String,
     val messId: String,
     val fromDate: String,
-    val fromDateTimeStamp: Long,
+    val fromDateTimeStamp: String,
     val toDate: String,
-    val toDateTimeStamp: Long,
+    val toDateTimeStamp: String,
     val payment: String,
     val messType: String,
     val paymentType: String,
@@ -23,6 +23,6 @@ data class MessData(
     val deletedBy: String,
     @PrimaryKey(autoGenerate = false) val id: Int? = null
 ) {
-    constructor() : this("","", "", 0, "", 0, "", "", "", "", 0, "", 0, "", false, "")
+    constructor() : this("","", "", "", "", "", "", "", "", "", 0, "", 0, "", false, "")
 }
 

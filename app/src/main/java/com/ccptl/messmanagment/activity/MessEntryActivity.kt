@@ -147,7 +147,8 @@ class MessEntryActivity : AppCompatActivity() {
                     "deletedBy" to "",
                 )
                 fireStore.collection("messEntry")
-                    .add(messEntry)
+                    .document(messId)
+                    .set(messEntry)
                     .addOnSuccessListener {
                         pbLoader.visibility = ProgressBar.GONE
 
