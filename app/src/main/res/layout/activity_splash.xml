@@ -6,20 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
-    <TextView
-        android:id="@+id/tvLoading"
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerInParent="true"
+        android:src="@drawable/food" />
+
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading..."
-        android:fontFamily="@font/poppins_medium"
-        tools:ignore="HardcodedText" />
-
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivLogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/tvLoading"/>
+        android:layout_marginTop="20dp"
+        android:indeterminateTint="@color/dark_gray"/>
+
 
 </RelativeLayout>

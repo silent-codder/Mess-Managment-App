@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ccptl.messmanagment.BuildConfig
@@ -21,6 +20,7 @@ import com.ccptl.messmanagment.viewModel.RoomViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.ArrayList
 
 class MemberListActivity : AppCompatActivity() {
 
@@ -31,6 +31,11 @@ class MemberListActivity : AppCompatActivity() {
     private lateinit var rvMemberList: RecyclerView
     private lateinit var refresh: SwipeRefreshLayout
 
+    private lateinit var rlToolbar: RelativeLayout
+    private lateinit var ivBtnSearch: ImageView
+    private lateinit var tvBtnSearchViewCancel: TextView
+    private lateinit var svSearchView: SearchView
+
 
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var prefHelper: PrefHelper
@@ -38,6 +43,7 @@ class MemberListActivity : AppCompatActivity() {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val CURRENT_USER_ID = firebaseAuth.currentUser?.uid
     private val memberListAdapter by lazy { MemberListAdapter() }
+    private var data: List<MemberData> = ArrayList()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +56,11 @@ class MemberListActivity : AppCompatActivity() {
         fabAddMember = findViewById(R.id.fabAddMember)
         rvMemberList = findViewById(R.id.rvMemberList)
         refresh = findViewById(R.id.refresh)
+
+        tvBtnSearchViewCancel = findViewById(R.id.tvCancel)
+        rlToolbar = findViewById(R.id.rlToolbar)
+        ivBtnSearch = findViewById(R.id.ivBtnSearch)
+        svSearchView = findViewById(R.id.searchView)
 
         ivBtnBack.setOnClickListener { onBackPressed() }
         version.text = "v" + BuildConfig.VERSION_NAME
@@ -77,12 +88,59 @@ class MemberListActivity : AppCompatActivity() {
                 tvNoDataFound.visibility = TextView.GONE
                 rvMemberList.visibility = RecyclerView.VISIBLE
                 memberListAdapter.setMemberListData(it)
+                data = it
             } else {
                 tvNoDataFound.visibility = TextView.VISIBLE
                 rvMemberList.visibility = RecyclerView.GONE
             }
         })
 
+        ivBtnSearch.setOnClickListener {
+            svSearchView.visibility = View.VISIBLE
+            rlToolbar.visibility = View.GONE
+            tvBtnSearchViewCancel.visibility = View.VISIBLE
+        }
+
+        tvBtnSearchViewCancel.setOnClickListener {
+            svSearchView.visibility = View.GONE
+            rlToolbar.visibility = View.VISIBLE
+            tvBtnSearchViewCancel.visibility = View.GONE
+            memberListAdapter.setMemberListData(data)
+        }
+
+        svSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchSession(query)
+                } else {
+                    memberListAdapter.setMemberListData(data)
+                    tvNoDataFound.visibility = View.GONE
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!!.isNotEmpty()) {
+                    searchSession(newText)
+                } else {
+                    memberListAdapter.setMemberListData(data)
+                    tvNoDataFound.visibility = View.GONE
+                }
+                return false
+            }
+        })
+
+    }
+
+    private fun searchSession(query: String) {
+        val searchList: List<MemberData> = data.filter { it.name.contains(query, true) }
+        if (searchList.isNotEmpty()) {
+            memberListAdapter.setMemberListData(searchList)
+            tvNoDataFound.visibility = View.GONE
+        } else {
+            memberListAdapter.setMemberListData(searchList)
+            tvNoDataFound.visibility = View.VISIBLE
+        }
     }
 
     private fun checkLastEntry() {
@@ -111,7 +169,9 @@ class MemberListActivity : AppCompatActivity() {
     private fun updateRoomDB() {
         roomViewModel.deleteAllMemberData()
         fireStore.collection("members")
-            .whereEqualTo("createdBy", CURRENT_USER_ID).get()
+            .whereEqualTo("isDeleted", 0)
+            .whereEqualTo("createdBy", CURRENT_USER_ID)
+            .get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     for (document in it.result) {
@@ -120,7 +180,7 @@ class MemberListActivity : AppCompatActivity() {
                     }
                     prefHelper.put(Constants.CHECK_LAST_ENTRY_MEMBER_DATA,false)
                     refresh.isRefreshing = false
-                    Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show()
                 }
             }.addOnFailureListener { e ->
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()

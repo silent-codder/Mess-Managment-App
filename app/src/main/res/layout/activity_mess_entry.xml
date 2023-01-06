@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/ivBtnBack"
-                android:layout_width="14dp"
+                android:layout_width="28dp"
                 android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"

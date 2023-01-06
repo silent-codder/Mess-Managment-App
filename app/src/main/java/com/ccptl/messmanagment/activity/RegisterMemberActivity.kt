@@ -80,7 +80,7 @@ class RegisterMemberActivity : AppCompatActivity() {
             "createdOn" to System.currentTimeMillis(),
             "updatedBy" to CURRENT_USER_ID,
             "updatedOn" to System.currentTimeMillis(),
-            "isDeleted" to false,
+            "isDeleted" to 0,
             "deletedBy" to "",
         )
 

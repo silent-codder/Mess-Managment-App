@@ -13,9 +13,9 @@ data class MemberData(
     val createdOn: Long,
     val updatedBy: String,
     val updatedOn: Long,
-    val isDeleted: Boolean,
+    val isDeleted: Int,
     val deletedBy: String,
     @PrimaryKey(autoGenerate = false) val id: Int? = null
 ) {
-    constructor() : this("", "", "", "", "", 0, "", 0, false, "")
+    constructor() : this("", "", "", "", "", 0, "", 0, -1, "")
 }

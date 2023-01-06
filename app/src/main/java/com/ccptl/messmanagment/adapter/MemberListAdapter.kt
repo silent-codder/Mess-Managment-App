@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ccptl.messmanagment.R
 import com.ccptl.messmanagment.activity.InfoActivity
-import com.ccptl.messmanagment.member.MemberInfoActivity
 import com.ccptl.messmanagment.room.roomModel.MemberData
-import com.ccptl.messmanagment.utils.Constants
 import kotlinx.android.synthetic.main.member_list_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
