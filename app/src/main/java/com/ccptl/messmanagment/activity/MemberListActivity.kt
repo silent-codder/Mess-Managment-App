@@ -149,7 +149,8 @@ class MemberListActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val lastEntry = it.result.getBoolean("lastEntryMemberData")
-                    if (lastEntry!!) {
+                    val lastEntryBoolean = lastEntry ?: false
+                    if (lastEntryBoolean!!) {
                         updateRoomDB()
                         refresh.isRefreshing = false
                         fireStore.collection("lastEntry").document(CURRENT_USER_ID!!)

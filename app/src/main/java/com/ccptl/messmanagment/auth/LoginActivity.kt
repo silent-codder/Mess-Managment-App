@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns.EMAIL_ADDRESS
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ccptl.messmanagment.BuildConfig
 import com.ccptl.messmanagment.MainActivity
@@ -27,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register_member.*
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
@@ -41,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var pbLoader: ProgressBar
     private lateinit var btnLogin: Button
     private lateinit var prefHelper: PrefHelper
+    private lateinit var relativeLayoutSignUp: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +51,8 @@ class LoginActivity : AppCompatActivity() {
         tilPassword = findViewById(R.id.tilPassword)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
+
+        relativeLayoutSignUp = findViewById(R.id.RelativeLayoutSignUp)
 
         prefHelper = PrefHelper(this)
 
@@ -68,8 +69,20 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        btnLogin.setOnClickListener {
+        firebaseFirestore.collection("resister").
+            document("check").get().addOnCompleteListener {
+            if (it.isSuccessful) {
+                val value = it.result.getBoolean("allow")
+                val bool = value ?: false
+                if (bool) {
+                    relativeLayoutSignUp.visibility = View.VISIBLE
+                }else{
+                    relativeLayoutSignUp.visibility = View.GONE
+                }
+            }
+        }
 
+        btnLogin.setOnClickListener {
             val email = etEmail.text.trim().toString()
             val password = etPassword.text.trim().toString()
 

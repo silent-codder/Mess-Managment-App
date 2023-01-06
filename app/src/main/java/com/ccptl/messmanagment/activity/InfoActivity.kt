@@ -239,7 +239,8 @@ class InfoActivity : AppCompatActivity(),MessListAdapter.ItemClickListener {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val lastEntry = it.result.getBoolean("lastEntryMessData")
-                    if (lastEntry!!) {
+                    val lastEntryBoolean = lastEntry ?: false
+                    if (lastEntryBoolean!!) {
                         updateRoomDB()
                         fireStore.collection("lastEntry").document(CURRENT_USER_ID!!)
                             .update("lastEntryMessData", false)
